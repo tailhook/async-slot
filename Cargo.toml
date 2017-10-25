@@ -1,0 +1,16 @@
+[package]
+name = "async-slot"
+description = """
+    An asynchronous (futures-based) channel that only preserves last value sent
+"""
+license = "MIT/Apache-2.0"
+readme = "README.md"
+keywords = ["tokio", "futures", "async", "slot"]
+categories = ["asynchronous"]
+homepage = "https://github.com/tailhook/async-slot"
+documentation = "https://docs.rs/async-slot"
+version = "0.4.1"
+authors = ["paul@colomiets.name"]
+
+[dependencies]
+futures = "0.1.15"
