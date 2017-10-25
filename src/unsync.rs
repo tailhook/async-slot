@@ -7,6 +7,8 @@ use std::cell::RefCell;
 use futures::task::{self, Task};
 use futures::{Sink, Stream, AsyncSink, Async, Poll, StartSend};
 
+use SendError;
+
 /// Slot is very similar to unbounded channel but only stores last value sent
 ///
 /// I.e. if you want to send some value between from producer to a consumer
@@ -27,11 +29,6 @@ pub struct Sender<T> {
 pub struct Receiver<T> {
     inner: Rc<RefCell<Inner<T>>>,
 }
-
-/// Error type for sending, used when the receiving end of a channel is
-/// dropped
-#[derive(Clone, PartialEq, Eq, Debug)]
-pub struct SendError<T>(T);
 
 #[derive(Debug)]
 struct Inner<T> {
