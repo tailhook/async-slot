@@ -6,6 +6,36 @@
 //!
 //! The `sync` one which should be used by default is also reexported at
 //! the root of this crate.
+//!
+//! # Features
+//!
+//! 1. Compacts memory (only last value is kept)
+//! 2. Has `poll_cancel` and `is_canceled`
+//! 3. Single-producer/single-consumer
+//! 4. Never has backpressure (because value is just replaced)
+//! 5. Replaced value can be recovered if using `swap` method.
+//! 6. `Sync`, so if multi-producer is desired, `Sender` can be wrapped
+//!    into an `Arc`/`Rc` and `swap` method is used to update value.
+//!
+//! # Example
+//!
+//! ```
+//! # extern crate futures;
+//! # extern crate async_slot;
+//! #
+//! # use futures::prelude::*;
+//! # use futures::stream::iter_ok;
+//! #
+//! # fn main() {
+//! let (tx, rx) = async_slot::channel::<i32>();
+//!
+//! tx.send_all(iter_ok(vec![1, 2, 3])).wait();
+//!
+//! let received = rx.collect().wait().unwrap();
+//! assert_eq!(received, vec![3]);
+//! # }
+//! ```
+//!
 
 #![warn(missing_docs)]
 #![warn(missing_debug_implementations)]
