@@ -1,4 +1,5 @@
-//! An unbounded channel that only stores last value sent
+//! A single-thread variant of an unbounded channel that only stores
+//! last value sent
 
 use std::rc::{Rc, Weak};
 use std::cell::RefCell;

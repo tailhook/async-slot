@@ -1,4 +1,5 @@
-//! An unbounded channel that only stores last value sent
+//! A thread-safe variant of an unbounded channel that only
+//! stores last value sent
 
 use std::mem;
 use std::sync::{Arc, Weak, Mutex};
